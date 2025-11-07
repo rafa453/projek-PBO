@@ -1,0 +1,19 @@
+# https://dart.dev/guides/libraries/private-files
+# Created by `dart pub`
+.dart_tool/
+# Dart / Flutter
+.dart_tool/
+.packages
+.pub/
+build/
+ios/
+android/
+linux/
+macos/
+windows/
+web/
+coverage/
+*.log
+
+# VS Code
+.vscode/
