@@ -24,7 +24,7 @@ class Gudang {
   }
 
   void tambahStok() {
-    
+    print("selamat malam");
   }
 
   void kurangiStok() {
