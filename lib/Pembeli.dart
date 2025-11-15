@@ -1,12 +1,13 @@
 class Pembeli {
   String idPembeli;
-  String NamaPembeli;
-  String Alamat;
+  String namaPembeli;
+  String alamat;
 
-  Pembeli(this.idPembeli, this.NamaPembeli, this.Alamat);
+  Pembeli(this.idPembeli, this.namaPembeli, this.alamat);
+
   void getDetail() {
     print('ID : $idPembeli');
-    print('Nama : $NamaPembeli');
-    print('Alamat : $Alamat');
+    print('Nama : $namaPembeli');
+    print('Alamat : $alamat');
   }
 }

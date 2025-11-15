@@ -1,33 +1,64 @@
-import 'package:project_pbo/Supplier.dart';
-
 import 'Barang.dart';
 
 class Gudang {
   String idGudang;
   String namaGudang;
-  Barang barang;
-  Supplier supplier;
 
-  Map<Barang, int> stokBarang = {};
+  Map<String, int> stok = {};
+  Map<String, Barang> daftarBarang = {};
 
-  Gudang(this.idGudang, this.namaGudang, this.barang, this.supplier);
+  Gudang(this.idGudang, this.namaGudang);
 
-  void cekStok() {
-    print("===== STOK GUDANG: $namaGudang =====");
-    if (stokBarang.isEmpty) {
-      print('Belum ada barang yang masuk');
+  //mendaftarkan barang baru
+  void daftarBarangBaru(Barang barang, int initialStok) {
+    daftarBarang[barang.idBarang] = barang;
+    stok[barang.idBarang] = initialStok;
+    print(
+      '${barang.namaBarang} berhasil didaftarkan di $namaGudang dengan stok awal $initialStok',
+    );
+  }
+
+  int cekStock(String idBarang) {
+    // Mengembalikan 0 jika idBarang tidak ditemukan
+    return stok[idBarang] ?? 0;
+  }
+
+  void tambahStok(Barang barang, int jumlah) {
+    if (daftarBarang.containsKey(barang.idBarang)) {
+      stok[barang.idBarang] = cekStock(barang.idBarang) + jumlah;
+      print(
+        'stok ${barang.namaBarang} di $namaGudang ditambahkan $jumlah. Total : ${cekStock(barang.idBarang)}',
+      );
     } else {
-      stokBarang.forEach((barang, jumlah) {
-        print("${barang.NamaBarang} (ID: ${barang.idBarang}) - Stok: $jumlah");
-      });
+      //jika barang belum terdaftar
+      daftarBarangBaru(barang, jumlah);
     }
   }
 
-  void tambahStok() {
-    print("selamat malam");
+  bool kurangiStock(Barang barang, int jumlah) {
+    int stokSekarang = cekStock(barang.idBarang);
+    if (stokSekarang >= jumlah) {
+      stok[barang.idBarang] = stokSekarang - jumlah;
+      print(
+        'Stok ${barang.namaBarang} di $namaGudang dikurangi $jumlah. Sisa: ${cekStock(barang.idBarang)}',
+      );
+      return true;
+    } else {
+      print(
+        'Gagal mengurangi stok. Stok ${barang.namaBarang} hanya $stokSekarang, kurang $jumlah.',
+      );
+      return false;
+    }
   }
 
-  void kurangiStok() {
-
+  void tampilkanSemua() {
+    print('\n--- Laporan stok $namaGudang ---');
+    stok.forEach((id, jumlah) {
+      String namaBarang = daftarBarang[id]?.namaBarang ?? 'N/A';
+      print('$namaBarang (ID : $id) : $jumlah');
+    });
+    print('----------------------------------');
   }
+
+  
 }
