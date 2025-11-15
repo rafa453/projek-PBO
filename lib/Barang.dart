@@ -1,18 +1,14 @@
 class Barang {
   String idBarang;
   String merek;
-  String NamaBarang;
-  int HargaJual;
-  int HargaBeli;
+  String namaBarang;
+  int hargaJual;
+  int hargaBeli;
 
-  Barang(
-    this.idBarang,
-    this.merek,
-    this.NamaBarang,
-    this.HargaJual,
-    this.HargaBeli,
-  );
+  Barang(this.idBarang, this.merek, this.namaBarang, this.hargaJual, this.hargaBeli);
   void getDetailProduk() {
-    
+    print(
+      '$namaBarang ($merek) - ID: $idBarang\nHarga Jual: $hargaJual | Harga Beli: $hargaBeli',
+    );
   }
 }

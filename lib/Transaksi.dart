@@ -1,45 +1,44 @@
-import 'package:project_pbo/Barang.dart';
-
+import 'item_transaksi.dart';
 import 'Pembeli.dart';
 
 class Transaksi {
   String idTransaksi;
-  DateTime TanggalTransaksi;
-  String JenisPembayaran;
-  int TotalHarga = 0;
-  int jumlah;
+  DateTime tanggalTransaksi;
+  String jenisPembayaran;
+  int totalHarga = 0;
+
+  //relasi 'melakukan' dan 'berisi'
   Pembeli pembeli;
-  List<Barang> daftarBarang = [];
+  List<ItemTransaksi> items = [];
 
-  Transaksi(
-    this.idTransaksi,
-    this.TanggalTransaksi,
-    this.JenisPembayaran,
-    this.TotalHarga,
-    this.jumlah,
-    this.pembeli
-  );
-  void addItem(Barang barang) {
-    daftarBarang.add(barang);
-    print('Barang : ${barang.NamaBarang}');
-    print('Harga : RP.${barang.HargaJual}');
-    print('Jumlah : ${jumlah}');
+  Transaksi(this.idTransaksi, this.pembeli, this.jenisPembayaran)
+    : tanggalTransaksi = DateTime.now();
+
+  void addItem(ItemTransaksi itemTransaksi) {
+    items.add(itemTransaksi);
   }
 
-  void hitungTotal(Barang barang) {
-    daftarBarang.add(barang);
-    TotalHarga = barang.HargaJual * jumlah;
-    print('total harga: ${TotalHarga}');
+  int hitungTotal() {
+    totalHarga = 0;
+    for (var item in items) {
+      totalHarga += item.subtotal;
+    }
+    return totalHarga;
   }
 
-  void cekStruk() {
-    print('=======================');
-    print('====STRUK TRANSAKSI====');
-    print('== 1.ID pembeli : ${pembeli.idPembeli}==');
-    print('== 2.ID transaksi : $idTransaksi==');
-    print('== 3.Tanggal Transaksi $TanggalTransaksi==');
-    print('== 4.Jenis Pembayaran $JenisPembayaran==');
-    print('== 5.Total harga $TotalHarga==');
-    print('=======================');
+  void cetakStruk() {
+    hitungTotal(); // Pastikan total sudah dihitung
+    print('\n=======================================');
+    print('          STRUK PEMBELIAN SEMBAKO');
+    print('=======================================');
+    print('ID Transaksi: $idTransaksi');
+    print('Tanggal: ${tanggalTransaksi.toString().split(' ')[0]}');
+    print('Pembeli: ${pembeli.namaPembeli}');
+    print('Pembayaran: $jenisPembayaran');
+    print('---------------------------------------');
+    items.forEach((item) => print(item.getDetailItem( )));
+    print('---------------------------------------');
+    print('TOTAL BAYAR: $totalHarga');
+    print('=======================================');
   }
 }
