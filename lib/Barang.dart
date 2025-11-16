@@ -2,8 +2,8 @@ class Barang {
   String idBarang;
   String merek;
   String namaBarang;
-  int hargaJual;
-  int hargaBeli;
+  double hargaJual;
+  double hargaBeli;
 
   Barang(this.idBarang, this.merek, this.namaBarang, this.hargaJual, this.hargaBeli);
   void getDetailProduk() {
