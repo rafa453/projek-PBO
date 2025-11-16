@@ -22,13 +22,8 @@ class SistemPenjualan {
 
   SistemPenjualan() {
     // Data awal
-    supplier.add(
-      Supplier(
-        "SP001",
-        "PT SEMBAKO ABADI NAN JAYA",
-        "sembako@abadinanjaya.com",
-      ),
-    );
+    supplier.add(Supplier("SP001","PT SEMBAKO ABADI NAN JAYA","sembako@abadinanjaya.com",));
+    supplier.add(Supplier("SP002", "PT PT BERAPA", "sembako@ptberapa.com"));
     barang.add(Barang("BR001", "KOKOKU", "Beras", 20000.0, 18000.0));
     barang.add(Barang("BR002", "KING", "Gula", 15000.0, 13000.0));
     gudang.tambahStok(barang[0], 50);
@@ -48,8 +43,8 @@ class SistemPenjualan {
       if (result != null && result.isNotEmpty) {
         return result;
       }
-        console.setForegroundColor  (ConsoleColor.brightRed);
-        console.writeLine('input tidak boleh kosong');
+      console.setForegroundColor(ConsoleColor.brightRed);
+      console.writeLine('input tidak boleh kosong');
     }
   }
 
@@ -147,55 +142,40 @@ class SistemPenjualan {
     console.resetColorAttributes();
   }
 
-  // Method untuk tambah stok dari supplier
   void tambahStokDariSupplier() {
-    console.setForegroundColor(ConsoleColor.brightCyan);
-    console.writeLine("\n--- Tambah Stok dari Supplier ---");
+  console.setForegroundColor(ConsoleColor.brightCyan);
+  console.writeLine("\n--- Tambah Stok dari Supplier ---");
 
-    // Menggunakan Select untuk Supplier
-    var namaSupplierList = supplier.map((s) => s.namaSupplier).toList();
-    
-    int idxSupplier = cli.Select(
-      prompt: "Pilih Supplier:",
-      options: namaSupplierList,
-    ).interact();
+  // Pilih supplier
+  var namaSupplierList = supplier.map((s) => s.namaSupplier).toList();
+  int idxSupplier = cli.Select(
+    prompt: "Pilih Supplier:",
+    options: namaSupplierList,
+  ).interact();
+  Supplier selectedSupplier = supplier[idxSupplier];
 
-    Supplier selectedSupplier = supplier[idxSupplier];
+  tampilkanBarang();
 
-    tampilkanBarang();
+  // Pilih barang
+  var idBarangList = barang.map((b) => b.idBarang).toList();
+  int idxBarang = cli.Select(
+    prompt: "Pilih ID barang:",
+    options: idBarangList,
+  ).interact();
 
-    // Menggunakan Select untuk ID barang
-    var idBarangList = barang.map((b) => b.idBarang).toList();
-    int idBarang = cli.Select(
-      prompt: "Pilih ID barang:",
-      options: idBarangList,
-    ).interact();
+  Barang selectBarang = barang[idxBarang];
 
-    Barang? selectBarang;
-    try {
-      selectBarang = barang.firstWhere((b) => b.idBarang == idBarang);
-    } catch (e) {
-      console.setBackgroundColor(ConsoleColor.brightRed);
-      console.writeLine("Barang tidak ditemukan.");
-      return;
-    }
+  int jumlah = _getInputInt("Jumlah tambah stok:");
 
-    // Menggunakan _getInputInt
-    int jumlah = _getInputInt("Jumlah tambah stok:");
+  gudang.tambahStok(selectBarang, jumlah);
 
-    if (jumlah <= 0) {
-      console.setForegroundColor(ConsoleColor.brightRed);
-      console.writeLine("Jumlah harus lebih dari 0.");
-      return;
-    }
+  console.setForegroundColor(ConsoleColor.brightGreen);
+  console.writeLine(
+    "Stok berhasil ditambahkan dari ${selectedSupplier.namaSupplier}.",
+  );
+  console.resetColorAttributes();
+}
 
-    gudang.tambahStok(selectBarang, jumlah);
-    console.setForegroundColor(ConsoleColor.brightGreen);
-    console.writeLine(
-      "Stok berhasil ditambahkan dari ${selectedSupplier.namaSupplier}.",
-    );
-    console.resetColorAttributes();
-  }
 
   //Method untuk melakukan pembelian
   void lakukanPembelian() {
@@ -291,9 +271,9 @@ class SistemPenjualan {
 
     for (var t in transaksi) {
       double total = t.items.fold(
-    0.0,
-    (sum, item) => sum + item.hitungSubtotal(), // <-- Koreksi di sini!
-);
+        0.0,
+        (sum, item) => sum + item.hitungSubtotal(), // <-- Koreksi di sini!
+      );
       console.writeLine(
         "ID: ${t.idTransaksi} | Pembeli: ${t.pembeli.namaPembeli} | Total: Rp${total.toStringAsFixed(0)}",
       );

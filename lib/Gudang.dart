@@ -55,7 +55,7 @@ class Gudang {
   }
 
   void tampilkanSemua() {
-    console.setForegroundColor(ConsoleColor.brightWhite)
+    console.setForegroundColor(ConsoleColor.brightWhite);
     console.writeLine('\n--- Laporan stok $namaGudang ---');
     stok.forEach((id, jumlah) {
       String namaBarang = daftarBarang[id]?.namaBarang ?? 'N/A';
