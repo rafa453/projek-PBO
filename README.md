@@ -1,38 +1,49 @@
-# Projek PBO (Pemrograman Berorientasi Objek)
+# 🛒 Project PBO: Sistem Penjualan Sembako CLI
 
-[![Lisensi MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+Proyek ini adalah implementasi sistem manajemen penjualan dan inventaris sederhana berbasis Command Line Interface (CLI) menggunakan bahasa pemrograman Dart dan prinsip-prinsip Object-Oriented Programming (PBO).
 
-Proyek **projek-PBO** adalah aplikasi *command-line* sederhana yang dikembangkan sebagai bagian dari tugas mata kuliah Pemrograman Berorientasi Objek (PBO).
+---
 
-Aplikasi ini dirancang untuk mendemonstrasikan implementasi konsep-konsep dasar OOP, seperti **Enkapsulasi**, **Inheritansi**, **Polimorfisme**, dan **Abstraksi** menggunakan bahasa pemrograman Dart.
+## ✨ Fitur Utama Aplikasi
 
-## Fitur Utama
+Sistem ini memungkinkan pengguna untuk mengelola stok gudang, mencatat transaksi pembelian oleh pelanggan, dan memelihara data master (Barang, Pembeli, Supplier).
 
-* **Implementasi Konsep OOP:** Menggunakan kelas, objek, dan metode untuk memodelkan entitas dunia nyata.
-* **Sistem Interaksi CLI:** Aplikasi berjalan sepenuhnya melalui terminal atau *command prompt*, memungkinkan interaksi melalui input teks.
-* **Struktur Kode Modular:** Kode inti aplikasi diorganisir dalam direktori `lib/`, memisahkan logika utama dari *entrypoint* aplikasi.
+* **Manajemen Stok:** Menambah stok dari Supplier dan mengurangi stok otomatis saat terjadi transaksi pembelian.
+* **Transaksi Interaktif:** Proses pembelian yang melibatkan pemilihan Pembeli dan Barang secara *real-time* menggunakan menu interaktif.
+* **Validasi Input:** Menggunakan *library* `interact_cli` untuk memastikan input data (angka, pilihan menu) valid dan berada dalam jangkauan yang benar.
+* **Laporan:** Menampilkan daftar stok gudang dan riwayat transaksi.
+* **Enkapsulasi OOP:** Setiap entitas (Barang, Gudang, Pembeli, Supplier, Transaksi) dienkapsulasi dalam kelasnya masing-masing.
 
-## Teknologi yang Digunakan
+---
 
-* **Bahasa Pemrograman:** [Dart](https://dart.dev/)
-* **Manajemen Paket:** Dart Pub
-* **Lingkungan:** Command-line Interface (CLI)
+## 🚀 Teknologi dan Dependensi
 
-## Prasyarat Instalasi
+| Kategori | Teknologi/Package | Deskripsi |
+| :--- | :--- | :--- |
+| **Bahasa Pemrograman** | Dart | Bahasa utama untuk logika aplikasi dan OOP. |
+| **Interface** | `dart:io` | Library bawaan Dart untuk input/output standar. |
+| **Interaksi CLI** | `interact_cli` | Digunakan untuk membuat menu pilihan (`Select`), konfirmasi (`Confirm`), dan input dengan validasi yang lebih baik daripada `dart:io`. |
+| **Styling Console** | `dart_console` | Digunakan untuk memberikan warna (foreground/background) pada output terminal. |
 
-Sebelum menginstal dan menjalankan proyek ini, pastikan Anda telah memasang **Dart SDK** di sistem Anda.
+---
 
-1.  **Dart SDK:** Versi 2.19.0 atau yang lebih baru.
-    * [Panduan Instalasi Resmi Dart](https://dart.dev/get-dart)
+## ⚙️ Prasyarat Instalasi
 
-## Instalasi
+Pastikan sistem Anda sudah terinstal Dart SDK.
 
-Ikuti langkah-langkah di bawah ini untuk mendapatkan salinan proyek yang berjalan di mesin lokal Anda.
+1.  **Instal Dart SDK:** Ikuti petunjuk resmi dari [Dart website](https://dart.dev/get-dart).
+2.  **Clone Repository:**
+    ```bash
+    git clone [https://github.com/rafa453/projek-PBO.git](https://github.com/rafa453/projek-PBO.git)
+    cd projek-PBO
+    ```
+3.  **Install Dependencies:** Ambil semua *package* yang dibutuhkan (termasuk `interact_cli` dan `dart_console`).
+    ```bash
+    dart pub get
+    ```
 
-### 1. Kloning Repositori
+---
 
-Buka terminal Anda dan kloning repositori ini:
+## 📂 Susunan Project
 
-```bash
-git clone [https://github.com/rafa453/projek-PBO.git](https://github.com/rafa453/projek-PBO.git)
-cd projek-PBO
+Struktur proyek mengikuti konvensi Dart:
