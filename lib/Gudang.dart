@@ -1,4 +1,7 @@
 import 'Barang.dart';
+import 'package:dart_console/dart_console.dart';
+
+Console console = Console();
 
 class Gudang {
   String idGudang;
@@ -52,13 +55,12 @@ class Gudang {
   }
 
   void tampilkanSemua() {
-    print('\n--- Laporan stok $namaGudang ---');
+    console.setForegroundColor(ConsoleColor.brightWhite)
+    console.writeLine('\n--- Laporan stok $namaGudang ---');
     stok.forEach((id, jumlah) {
       String namaBarang = daftarBarang[id]?.namaBarang ?? 'N/A';
-      print('$namaBarang (ID : $id) : $jumlah');
+      console.writeLine('$namaBarang (ID : $id) : $jumlah');
     });
-    print('----------------------------------');
+    console.writeLine('----------------------------------');
   }
-
-  
 }
